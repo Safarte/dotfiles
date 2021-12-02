@@ -4,23 +4,21 @@ export TERM="xterm-256color"
 export ZSH=$HOME/.oh-my-zsh
 
 # Theme name
-ZSH_THEME="spaceship"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+#ZSH_THEME="spaceship"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git virtualenv virtualenvwrapper)
+plugins=(git docker fzf fzf-tab colored-man-pages command-not-found sudo)
 
 # User configuration
 
 # aliases
 alias upgrade="sudo apt-get update && sudo apt-get upgrade"
+alias gpl="git fetch -p; git pull"
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source $ZSH/oh-my-zsh.sh
 
@@ -32,11 +30,6 @@ export NVM_DIR="$HOME/.nvm"
 # yarn configuration
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# virtualenv and virtualenvwrapper
-export WORKON_HOME=/home/safarte/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
-
 # cargo configuration
 export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -46,12 +39,24 @@ fi
 
 export FPATH="$HOME/zsh:$FPATH"
 
-# linuxbrew configuration
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
 # go
 export PATH=$PATH:/usr/local/go/bin
 export GOBIN=/usr/local/go/bin
 
 # Expo
 export REACT_EDITOR=code
+
+# Texlive
+export PATH="/usr/local/texlive/2021/bin/x86_64-linux:$PATH"
+
+# For Loading the SSH key
+/usr/bin/keychain -q --nogui $HOME/.ssh/id_ed25519
+source $HOME/.keychain/$HOST-sh
+
+# Maven
+export M2_HOME=/usr/local/bin/maven
+export MAVEN_HOME=/usr/local/bin/maven
+export PATH=$PATH:$M2_HOME/bin
+
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.config/starship.toml
