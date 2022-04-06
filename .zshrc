@@ -60,3 +60,4 @@ export PATH=$PATH:$M2_HOME/bin
 
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship.toml
+
